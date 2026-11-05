@@ -5,20 +5,24 @@ repository only holds releases; the source code lives elsewhere.
 
 ## Install
 
-Download the archive for your platform from the
-[latest release](https://github.com/fossmo/gus-release/releases/latest):
-
-| Platform | File |
-|----------|------|
-| Linux x86-64 | `gus_linux_amd64.tar.gz` |
-| Linux ARM64 | `gus_linux_arm64.tar.gz` |
-| macOS Intel | `gus_darwin_amd64.tar.gz` |
-| macOS Apple Silicon | `gus_darwin_arm64.tar.gz` |
-
 ```sh
-tar -xzf gus_linux_amd64.tar.gz
-install gus ~/.local/bin/   # or anywhere on your PATH
+curl -fsSL https://github.com/fossmo/gus-release/releases/latest/download/install.sh | sh
 ```
+
+The script picks the right archive for your machine, checks its SHA-256
+checksum (and the minisign signature, if `minisign` is installed), and installs
+`gus` to `~/.local/bin`. Set `GUS_VERSION=v1.2.3` for a specific version or
+`GUS_INSTALL_DIR=<dir>` for another location.
+
+**macOS:** use the script (or `curl`) rather than downloading with a browser.
+gus is not notarized by Apple, so Gatekeeper blocks browser downloads ("Apple
+could not verify …"). If you already did, run
+`xattr -d com.apple.quarantine /path/to/gus`.
+
+Manual install: download `gus_<os>_<arch>.tar.gz` from the
+[latest release](https://github.com/fossmo/gus-release/releases/latest)
+(`darwin_arm64` for Apple Silicon, `darwin_amd64` for Intel Macs,
+`linux_amd64` / `linux_arm64` for Linux) and unpack it with `tar -xzf`.
 
 ## Verify
 
